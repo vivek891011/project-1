@@ -1,0 +1,109 @@
+additionalTrustBundlePolicy: Always
+apiVersion: v1
+baseDomain: mahity.local                      #domain_change
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform: {}
+  replicas: 0                          #should_be_zero
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform: {}
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: karan                        #cluster_name
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 192.168.10.0/24             #own_machine_network
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  vsphere:
+    apiVIPs:
+    - 192.168.10.51
+    failureDomains:
+    - name: generated-failure-domain
+      region: generated-region
+      server: vcenter.mahity.local
+      topology:
+        computeCluster: /mahitydc/host/mahityclusterdr
+        datacenter: mahitydc
+        datastore: /mahitydc/datastore/esxi-4a-ds
+        networks:
+        - VM Network
+        resourcePool: /mahitydc/host/mahityclusterdr/Resources
+      zone: generated-zone
+    ingressVIPs:
+    - 192.168.10.52
+    vcenters:
+    - datacenters:
+      - mahitydc
+      password: Mahity@123
+      port: 443
+      server: vcenter.mahity.local
+      user: administrator@mahity.local
+publish: External
+additionalTrustBundle: |                                           # mirror_registry
+ -----BEGIN CERTIFICATE-----
+ MIIDmTCCAoGgAwIBAgIUa0SgxnXzBMWjoit6N6qrTsDte1swDQYJKoZIhvcNAQEL
+ BQAwbDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAlZBMREwDwYDVQQHDAhOZXcgWW9y
+ azENMAsGA1UECgwEUXVheTERMA8GA1UECwwIRGl2aXNpb24xGzAZBgNVBAMMEmth
+ cmFuLm1haGl0eS5sb2NhbDAeFw0yNTA0MjIxMzQ2MTFaFw0yNjA0MTMxMzQ2MTFa
+ MBoxGDAWBgNVBAMMD3F1YXktZW50ZXJwcmlzZTCCASIwDQYJKoZIhvcNAQEBBQAD
+ ggEPADCCAQoCggEBAO/2JGQUbLRnXX6s0cKEHUaNPZZZv08MSQjT5+hHsGfgkHGS
+ MoMyLE2+IB69NfCvxEJEj2eBrNI7FegzZWf/U22Yxm6PY6QyBZCDAutJlGTUPAZW
+ xDL0+us+Cjv3eMfoOikEzGtCKh06V6j0uXssHHLO/Iy6U8vKAD2SDD8XZfa0Yjeq
+ laTlI9Mot9JNZFtIGv2y5oTJ7vJqNuSoem7I3sNAkyTCGNPYz10qzB2L+ISHXcLW
+ nqkOyAB4is9mP0pOY8JAJHHbZifdHDRvM2YFhvRkKX9dJL7N/He1DJNbURbjMVZg
+ WTWAwb1pY1bWC8NlAUMvhfxkeZP8lgbvWkZeZCMCAwEAAaOBhDCBgTALBgNVHQ8E
+ BAMCAuQwEwYDVR0lBAwwCgYIKwYBBQUHAwEwHQYDVR0RBBYwFIISa2FyYW4ubWFo
+ aXR5LmxvY2FsMB0GA1UdDgQWBBQybhk0//AVM2K3IgmeqCE7eLGmAzAfBgNVHSME
+ GDAWgBTIxds6omg1LXADYFgRUsQfvPkAaTANBgkqhkiG9w0BAQsFAAOCAQEAnW3q
+ vRS9EMdYdj5Qo50Z+xvoZHpBFx3ImxFQ7+lLqeoTKXW6Hjlh4lhzU7arlY/OT8cM
+ qinM/0FHN7d9dv6uNsfOCZTXz3ej/d3R8UsZoqpP4rV1PvDyLKbLwSM4zt91B4h7
+ Ndx0mHISMcsmyktS//cmJQf9AiPDF8znrkBfcLTZSzF23HlFRs46ZvedeVTO6l9k
+ n3Bd221ccbnQmq6M7nj7uzWVuV9bVO52EZP706HqdZpQmU6NXz1w17RTlpSKDJIZ
+ 3L/3ecltulAf9eVVPcvsWjalKg4LniFiY/Jnoz9ixrQiZmMv0/zmPa+KeqFazG4D
+ KmIwOd5dnFXR1l46fw==
+ -----END CERTIFICATE-----
+ -----BEGIN CERTIFICATE-----
+ MIID3DCCAsSgAwIBAgIUfooFbLsg3Gu9JMI9hxszZHM0lNUwDQYJKoZIhvcNAQEL
+ BQAwbDELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAlZBMREwDwYDVQQHDAhOZXcgWW9y
+ azENMAsGA1UECgwEUXVheTERMA8GA1UECwwIRGl2aXNpb24xGzAZBgNVBAMMEmth
+ cmFuLm1haGl0eS5sb2NhbDAeFw0yNTA0MjIxMzQ2MTBaFw0yODAyMTAxMzQ2MTBa
+ MGwxCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJWQTERMA8GA1UEBwwITmV3IFlvcmsx
+ DTALBgNVBAoMBFF1YXkxETAPBgNVBAsMCERpdmlzaW9uMRswGQYDVQQDDBJrYXJh
+ bi5tYWhpdHkubG9jYWwwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCv
+ +QZcY8uVzFIRctcANyskLB6M7/nCfLjvxBstX3m8sRDxWgEaMLcXJGH+hPZYHndc
+ fbRIAnpCkljF4uO92AAvE0PvA4uVS8J7JFhCVbXgRc7WQ1B/QQe2yuECSc1txAuV
+ aVeQB0QMjxv3+GUNm17WYqLcYvoVNVDJKw685QShgLYOiK1N9LBxOF11wp7OPfMA
+ eexZq50SpGMpaYZKKKYOUjIwNLfbzdsg8I4jg3wL42YAZ66I50jlRpwQpboKvOcl
+ G8111wIb0KUNaXOmVLhZDz+SOimG0rgpkCjHcAOP3UL/s4zhgdEDCvRs5WeJ8k4Z
+ XGu9cAUe0nLI/Jyz6xIhAgMBAAGjdjB0MAsGA1UdDwQEAwIC5DATBgNVHSUEDDAK
+ BggrBgEFBQcDATAdBgNVHREEFjAUghJrYXJhbi5tYWhpdHkubG9jYWwwEgYDVR0T
+ AQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQUyMXbOqJoNS1wA2BYEVLEH7z5AGkwDQYJ
+ KoZIhvcNAQELBQADggEBAGumOXV2OtdhD9J0yA4rYyq812HBhqD7xceqmstOKFx1
+ maWPorJ5eIIidcEyT/H/fbWPpEDcxNBG3K0sRVH05XTPOt82LsXjfXRyN6ySRQax
+ 85z64pQZYUtVWyiSRSNzeOps5Un8B2xSDlPBZ1AUYqfiwcZaXBhMA25Rbv6lqvF5
+ x8jz4iHJ2QITFoE2lF83g6H53uNo4C9vAgh07OftsijwJ2uefhfyiEXqI0/dm6Cz
+ Qidpm7yGA6+0u+DNhNemth1X1+YhjsbkWolLB6d6a4X706KSy6mejJ7/UhYesONn
+ 74P19c4XlMdN8hshFfh5knsZ5hCyEutDj1EQqrAVr8g=
+ -----END CERTIFICATE-----
+pullSecret: '{"auths":{"karan.mahity.local:8443":{"auth":"aW5pdDo2T1FyMjdLb1JpOHROMVRYeEM1VW5WRTNlZjB1OTRjdg==","email":"karanpal.p@mahity.com"}}}'
+sshKey: |
+  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCqVHjztwH9mnvxEEP+zkTV6T/nJyIW6cS1stwFqChvL4HW0s1cBqWOpb3LPaj2Qj+h0pGp3BMPan/zuieRP28gFRJtJQ2kZWQKZDW8STLkQZgz8Z0MMCDogn6mqTO8ebS5nAvyvc7j4CcIHeOUGO5j+hFpg05iuDRPxU7j7ezk1yA2vc38GUi+wL5GdKNfDDzNaRTMJzMN+n+LTEUG/mBkmHBs09/u4cG/kViAved6eOmrj8LeiWpZPNTTqq1xPuZRVuR16GvL48hZrd6216TprXEjt9V3aayvHUuTgxB+/IVklI2a4/xyueNcc1g3kFUY7Yti5JLlz+GQKx2X2VP47cwsdwnAujpscuAV7CMZzkanhrAbfG5lQNGedX3aZGfm5+Y1bkliKfqzzhmH+ETab1dPlgsErNswc1/+ePxKO6vdP55DrNkuToDabxe6Remy0x1EOIJQkqJC8i/jPcWLUGBC6KEE9Hc+/nOUl55Tyw/3J0MQdysIV+xJrmUbwtU= root@karan.mahity.local
+imageContentSources:             
+  - mirrors:
+    - karan.mahity.local:8443/ocp-base/openshift/release
+    source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+  - mirrors:
+    - karan.mahity.local:8443/ocp-base/openshift/release-images
+    source: quay.io/openshift-release-dev/ocp-release

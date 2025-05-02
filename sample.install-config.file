@@ -1,0 +1,136 @@
+additionalTrustBundlePolicy: Proxyonly
+apiVersion: v1
+baseDomain: mahity.local
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform: {}
+  replicas: 0                    #### should be zero 
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform: {}
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: ocp-vivek
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 192.168.10.0/24                          ##### should be change with your server ip 
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  vsphere:
+    apiVIPs:                                      ### should be delete 
+    - 192.168.10.58                              ### also delete 
+    failureDomains:
+    - name: generated-failure-domain
+      region: generated-region
+      server: vcenter.mahity.local
+      topology:
+        computeCluster: /mahitydc/host/cluster-vivek
+        datacenter: mahitydc
+        datastore: /mahitydc/datastore/esxi3-ds2
+        networks:
+        - VM Network
+        resourcePool: /mahitydc/host/cluster-vivek/Resources
+      zone: generated-zone
+    ingressVIPs:                               ## delete
+    - 192.168.10.59                              ### also delete 
+    vcenters:
+    - datacenters:
+      - mahitydc
+      password: Mahity@123
+      port: 443
+      server: vcenter.mahity.local
+      user: administrator@mahity.local
+publish: External
+additionalTrustBundle : |                              #### add_cert (mirror-registry && root-vCenter)
+  -----BEGIN CERTIFICATE-----
+  MIIDwjCCAqqgAwIBAgIUGkMCGH84LktpMwiPR3BaB4JJRykwDQYJKoZIhvcNAQEL
+  BQAwgYAxCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJWQTERMA8GA1UEBwwITmV3IFlv
+  cmsxDTALBgNVBAoMBFF1YXkxETAPBgNVBAsMCERpdmlzaW9uMS8wLQYDVQQDDCZt
+  aXJyb3ItcmVnaXN0cnkub2NwLXZpdmVrLm1haGl0eS5sb2NhbDAeFw0yNTAzMjQx
+  MDUyMzlaFw0yNjAzMTUxMDUyMzlaMBoxGDAWBgNVBAMMD3F1YXktZW50ZXJwcmlz
+  ZTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAOxTw9ctgK5tvsAmoq7F
+  r2l+WxzMnw+m8I492QsfnREK3ThLJ+WdXqvDJKIs4hroaPlkVVT0TYvw0yRktX6c
+  GKqcsKfBZj/6zI29TssU5sPn+QQCQEtUHytL2yblI2ndX88rRds3Xen7ccWOcJFF
+  JYu+O+BYZy2oZ0trISvtafpu1X1oosSUOwGYsyL57KCmiVDbszjGqaCrQf9KvIKL
+  RFXBLipD93mxvCALzum6jAebe+g7a7i6+w/ul1WgzsVfIJWJvQDi2b/WTitPCd/C
+  gZTn5u6fNfz4dYvsJwBD+pH5yVSpvREiKwRnfGs3FVoCBwk6Jp18tOQvo9WIlk4H
+  jBECAwEAAaOBmDCBlTALBgNVHQ8EBAMCAuQwEwYDVR0lBAwwCgYIKwYBBQUHAwEw
+  MQYDVR0RBCowKIImbWlycm9yLXJlZ2lzdHJ5Lm9jcC12aXZlay5tYWhpdHkubG9j
+  YWwwHQYDVR0OBBYEFMyQVVIWBFvWa18nqoY+vfl+4NhgMB8GA1UdIwQYMBaAFGng
+  qoZBOjsJSZ4ft1Qc7eDJYhCjMA0GCSqGSIb3DQEBCwUAA4IBAQAeC7K+4d5UQZWg
+  01w47AUvvX+01tK0+gj2Si36ZvKmmaX8a2MdPoXD6p9JCn6XlrTT9dUqJ/Cj8MnF
+  PQ0XpY4Azx+lS5DZnbT2VMnWQD3ULGDdwQ5cOjgsZLGwYoz8mcEJy4g669oyY57S
+  3+d9qdSHkuPMjKjWjJ7Vk5VNEiTDmcQO4bXDeHKmenzRWEKx8IrnmT/iR9DXGSa8
+  uVLK7PpUBn2pa3SbqmaRsSGShaAnAg8QgQx0hLm3VhDf4zi/jHkR19hRp76y730B
+  3mse2xLMmRsWWB9IheZvQX34yWSKKeA7XrFRdfFULA5OAm0Y0PULzYk+BnXidvGq
+  /TF1XdSv
+  -----END CERTIFICATE-----
+  -----BEGIN CERTIFICATE-----
+  MIIEHDCCAwSgAwIBAgIUONpif09fzvAM1XPwbg5ZVUVzAQIwDQYJKoZIhvcNAQEL
+  BQAwgYAxCzAJBgNVBAYTAlVTMQswCQYDVQQIDAJWQTERMA8GA1UEBwwITmV3IFlv
+  cmsxDTALBgNVBAoMBFF1YXkxETAPBgNVBAsMCERpdmlzaW9uMS8wLQYDVQQDDCZt
+  aXJyb3ItcmVnaXN0cnkub2NwLXZpdmVrLm1haGl0eS5sb2NhbDAeFw0yNTAzMjQx
+  MDUyMzlaFw0yODAxMTIxMDUyMzlaMIGAMQswCQYDVQQGEwJVUzELMAkGA1UECAwC
+  VkExETAPBgNVBAcMCE5ldyBZb3JrMQ0wCwYDVQQKDARRdWF5MREwDwYDVQQLDAhE
+  aXZpc2lvbjEvMC0GA1UEAwwmbWlycm9yLXJlZ2lzdHJ5Lm9jcC12aXZlay5tYWhp
+  dHkubG9jYWwwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCOFjQ05dbp
+  FwR+8Q77gf8xIohrDzKCVqdm5F0Zhh7BBUGMu1JXl8lMgZc6y7T4sl6GRw7JG/M7
+  qBKX/zHnnjZ0WAdm0XR7ISFPcJvwgJfolr07hNkEyvdqoxm8VPhxjk7AkMgV58Tm
+  7paHtVLxKaKiGI1NcdvXWQ01s+3myt/Qm8YsnE4DTMB6tZuJPb3H1fFCPTqpA8ca
+  wjndhuYkcatolBMjqPzKJ6ENNQMQbNcVitOQjxWmABZeCc1BDyWTt4jLKQeP+WBS
+  YsALUHQpZs5hOw5NZactxNzNvK8IG0wg3NIn55RUxgYtyt0vxTSi7SkLFvqT0rrh
+  kJVVia0jhQnnAgMBAAGjgYswgYgwCwYDVR0PBAQDAgLkMBMGA1UdJQQMMAoGCCsG
+  AQUFBwMBMDEGA1UdEQQqMCiCJm1pcnJvci1yZWdpc3RyeS5vY3Atdml2ZWsubWFo
+  aXR5LmxvY2FsMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYDVR0OBBYEFGngqoZBOjsJ
+  SZ4ft1Qc7eDJYhCjMA0GCSqGSIb3DQEBCwUAA4IBAQAsp1PYXZjJ9dsCoSjYl1AD
+  0Q3gQelyYw1yp7VyCYD9mX2KRKIj34/elm4bo+jPQRwK/4aUiKGRDqlu1BUeZc0K
+  gUnEvOlRjNXxlHF9wwh9PuxpI6wYWy2WsWkJdHJpPleFvVgiS4/c8HYlfOlFI2gt
+  zB6XDdMOnL0Q8+Ybql2X58rTLVUoeKHMWXBktqlMt+p5x8Rc+fSaBp9gPxh7wJrP
+  0gEsm9sZEY1BFN97GmCdMyEGZcbSjLFhR12nrvMmJDy0cIptQrJyZYf6tUV6mvpc
+  nqo6TkfGmuU2JHC9K8AreVnyPutGWPrW3zyuU4DO6n3brX6bwKB35YhTGhsULCxm
+  -----END CERTIFICATE-----
+  -----BEGIN CERTIFICATE-----
+  MIIEHzCCAwegAwIBAgIJAOt+ZElqItDaMA0GCSqGSIb3DQEBCwUAMIGaMQswCQYD
+  VQQDDAJDQTEWMBQGCgmSJomT8ixkARkWBm1haGl0eTEVMBMGCgmSJomT8ixkARkW
+  BWxvY2FsMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEdMBsGA1UE
+  CgwUdmNlbnRlci5tYWhpdHkubG9jYWwxGzAZBgNVBAsMElZNd2FyZSBFbmdpbmVl
+  cmluZzAeFw0yNDAzMTExMzQxMDlaFw0zNDAzMDkxMzQxMDlaMIGaMQswCQYDVQQD
+  DAJDQTEWMBQGCgmSJomT8ixkARkWBm1haGl0eTEVMBMGCgmSJomT8ixkARkWBWxv
+  Y2FsMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEdMBsGA1UECgwU
+  dmNlbnRlci5tYWhpdHkubG9jYWwxGzAZBgNVBAsMElZNd2FyZSBFbmdpbmVlcmlu
+  ZzCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMXtCA87JX4Cu4qK/2g1
+  uYSo7dMHhklLcC74/pG3RuuYFz9W3OFyDKyeX7gxCYIKyNADhQiXawz0jluh7jEc
+  LWm9T0NTuKwDuDcqXWZLumZ0teSLkGTVg1dTdYJGHEnHK6f0xIReYF9jM6/x/L/z
+  QckwFF5SXwRkK4zxHh2tZ0bIVfF9ZI6Tiug4jQdNKTTKgulEujgpqpy7gDAhUyGR
+  xLdlfnV4dG3XrkwZ6myy4CAt1jmxTP10nArItsdgNl4jasKBxx2g5VnnnZqmvm2P
+  Up2eN4BeqYsUlBg3te+1VvK+HlbGg04kuntVcEBiHUKrYgWD5Et8JU1ZC9zxI6gv
+  q00CAwEAAaNmMGQwHQYDVR0OBBYEFN0gys7rwfpmgXHvN8MmxWl9iBxVMB8GA1Ud
+  EQQYMBaBDmVtYWlsQGFjbWUuY29thwR/AAABMA4GA1UdDwEB/wQEAwIBBjASBgNV
+  HRMBAf8ECDAGAQH/AgEAMA0GCSqGSIb3DQEBCwUAA4IBAQCmST9TGWJKtRV8bpks
+  50F9WzA3Ex3D7ox0WnMUl3cEtGNNrs3ufi60ZTo5+Iik+meeub8MWGY2VhJonzbW
+  YX2TiOX8mcHU2Ehr2hYlAcOnidci7Gve8/VQEBNUudM+psoZ/CSlnkhEsZZJNxRj
+  tToILH5qEV55Axvhc+tFvGLax2x0Ay/h3fd6qWBaFAM9hwN6YeMpq2d6dUUx3fl5
+  Peoj3BgQLlXX9ALxYqrocgz6DsB/IKOZfcgzCp13eqMlJnwQZyBP6/j7b7yroO6r
+  MOePHnBVhbyGepVypbsh1w+dumaNQr8ZhH59zJUbqYFKDzkLDRYxIrSmtgKETle4
+  Z9YH
+  -----END CERTIFICATE-----
+imageContentSources:                                                     ####  oc-mirror-workspace
+- mirrors:
+  - ocp-vivek.mahity.local:8443/openshift/release
+  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+- mirrors:
+  - ocp-vivek.mahity.local:8443/openshift/release-images
+  source: quay.io/openshift-release-dev/ocp-release
+pullSecret: '{"auths":{"mirror-registry.ocp-vivek.mahity.local:8443":{"auth":"aW5pdDpnakxLWlZkMXkzYThPQ29CNXQya2h2MDc5NEVZVU1wNg==","email":"vivek.b@mahity.com"}}}'
+sshKey: |
+  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDBbtbsUeyw752qjN6fjLDCtN/T4JhMpEjDewNEZ9dFfodRKcyceTusDYWQy2yt2U42Uo6eCHGIacdeK1zZIkS92qTne/AkuApgTR2p86ig4sdA3tZAg26/QF3NPmyCCEQzoGVSM14EUWRCaALBTSo11/uPgLy8OeksZqXdMYahrjmaOaY8QOAvb5+AK/yz5Q2GwuOlgQGJ1sVrsVlPV5HW7+0Qse60HNcwzKzonNPWoObIHZr0Jr3oCrp0uGxSb6rPL47ZtcmackyWHA09adjD3n+mxYv7vTeTToDbuW/YLv/YNlSLsWOoK1WHgE35G7zU0674dl9rgNyZXO+9e7QOxuMisG1VnVzLMC6bYOOcRWuUjxVG35OZqK4LU+2QxWcb1FCT+/NIx75GKybxconLeeX8aV+FczDH0F+OEBkKl1tVRNiJp6yhQm6hZcHSRReErnzRZ+b5/uO4IJ2eD/uqOaF/pJx12KWwpcg4TLVCIJuctCvle8YHeXJlW/aBeus= root@mirror-registry.ocp-vivek.mahity.local
