@@ -1,0 +1,42 @@
+kind: ImageSetConfiguration 
+apiVersion: mirror.openshift.io/v1alpha2 
+storageConfig: 
+   local: 
+     path: /ocpdata/ocp-packages/plus-4.18.6
+mirror: 
+  operators: 
+  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.18 
+    packages: 
+    - name: advanced-cluster-management 
+      channels: 
+      - name: release-2.13 
+    - name: container-security-operator 
+      channels: 
+      - name: stable-3.14 
+    - name: compliance-operator 
+      channels: 
+      - name: stable 
+    - name: quay-bridge-operator 
+      channels: 
+      - name: stable-3.14 
+    - name: quay-operator 
+      channels: 
+      - name: stable-3.14 
+    - name: rhacs-operator 
+      channels: 
+      - name: stable 
+    - name: skupper-operator 
+      channels: 
+      - name: stable-2 
+    - name: submariner 
+      channels: 
+      - name: stable-0.20 
+    - name: multicluster-engine 
+      channels: 
+      - name: stable-2.8 
+    - name: file-integrity-operator 
+      channels:
+      - name: stable 
+    - name: redhat-oadp-operator 
+      channels: 
+      - name: stable-1.4 

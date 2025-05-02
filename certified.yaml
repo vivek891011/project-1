@@ -1,0 +1,15 @@
+kind: ImageSetConfiguration 
+apiVersion: mirror.openshift.io/v1alpha2 
+storageConfig:  
+   local: 
+     path: /ocpdata/ocp-packages/certified-4.18.6 
+mirror: 
+  operators: 
+  - catalog: registry.redhat.io/redhat/certified-operator-index:v4.18 
+    packages: 
+    - name: gpu-operator-certified 
+      channels: 
+      - name: v25.3 
+    - name: redis-enterprise-operator-cert 
+      channels: 
+      - name: production 

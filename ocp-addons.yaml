@@ -1,0 +1,99 @@
+kind: ImageSetConfiguration 
+apiVersion: mirror.openshift.io/v1alpha2 
+storageConfig: 
+   local: 
+     path: /ocpdata/ocp-packages/plus-4.18.6
+mirror: 
+   operators: 
+   - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.18 
+     packages: 
+     - name: cincinnati-operator 
+       channels: 
+       - name: v1 
+     - name: cluster-logging 
+       channels: 
+       - name: stable-6.2 
+     - name: loki-operator 
+       channels: 
+       - name: stable-6.2 
+     - name: openshift-cert-manager-operator 
+       channels: 
+       - name: stable-v1 
+     - name: rhods-operator 
+       channels: 
+       - name: stable 
+     - name: mcg-operator 
+       channels: 
+       - name: stable-4.18 
+     - name: node-healthcheck-operator 
+       channels: 
+       - name: stable 
+     - name: node-maintenance-operator 
+       channels: 
+       - name: stable 
+     - name: node-observability-operator 
+       channels: 
+       - name: alpha 
+         # - name: ccs-operator 
+         # channels: 
+         # - name: stable-4.18 
+     - name: odf-csi-addons-operator 
+       channels: 
+       - name: stable-4.18 
+     - name: odf-multicluster-orchestrator 
+       channels: 
+       - name: stable-4.18 
+     - name: odf-operator 
+       channels: 
+       - name: stable-4.18 
+     - name: elasticsearch-operator 
+       channels:
+       - name: stable-5.8 
+     - name: kernel-module-management 
+       channels: 
+       - name: stable 
+     - name: kernel-module-management-hub 
+       channels: 
+       - name: stable 
+     - name: local-storage-operator 
+       channels: 
+       - name: stable 
+     - name: openshift-custom-metrics-autoscaler-operator 
+       channels: 
+       - name: stable 
+     - name: self-node-remediation 
+       channels: 
+       - name: stable 
+     - name: service-registry-operator 
+       channels: 
+       - name: 2.x 
+     - name: topology-aware-lifecycle-manager 
+       channels: 
+       - name: stable 
+     - name: vertical-pod-autoscaler 
+       channels: 
+       - name: stable 
+     - name: web-terminal 
+       channels: 
+       - name: fast 
+     - name: amq-broker-rhel8 
+       channels: 
+       - name: 7.12.x 
+     - name: amq-online 
+       channels: 
+       - name: stable 
+     - name: amq-streams 
+       channels: 
+       - name: stable 
+     - name: amq7-interconnect-operator 
+       channels: 
+       - name: 1.10.x 
+     - name: amq-streams-console 
+       channels: 
+       - name: alpha 
+     - name: cluster-observability-operator
+       channels:
+       - name: stable
+     - name: nfd
+       channels:
+       - name: stable 

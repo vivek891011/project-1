@@ -1,0 +1,15 @@
+kind: ImageSetConfiguration 
+apiVersion: mirror.openshift.io/v1alpha2 
+storageConfig: 
+   local: 
+     path: /ocpdata/ocp-packages/extra-4.18.6 
+mirror: 
+   operators: 
+   - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.18 
+     packages: 
+     - name: servicemeshoperator 
+       channels: 
+       - name: stable 
+     - name: servicemeshoperator3 
+       channels: 
+       - name: stable 
