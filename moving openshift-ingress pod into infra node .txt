@@ -1,0 +1,28 @@
+
+monitoring k pod bhi infra mein lagae hai (sop)
+internal registry 
+
+
+
+
+
+***** 
+when we applied taint and label on infra node then co goes unstable because we need toleration
+
+# oc get po -n openshift-ingress -o wide 
+# oc edit  ingresscontroller default -n openshift-ingress-operator -o yaml
+
+edit from spec 
+
+spec:
+  replicas: 2
+  nodePlacement:
+    nodeSelector:
+      matchLabels:
+        node-role.kubernetes.io/infra: ""
+    tolerations:
+      - key: node-role.kubernetes.io/infra
+        operator: Exists
+        effect: NoSchedule
+
+ 
