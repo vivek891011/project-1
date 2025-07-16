@@ -1,0 +1,26 @@
+name = ldapcr.yaml
+
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+  - name: idbi
+    mappingMethod: claim
+    type: LDAP
+    ldap:
+      attributes:
+        id:
+        - cn
+        email:
+        - mail
+        name:
+        - cn
+        preferredUsername:
+        - sAMAccountName
+      bindDN: "cn=SAEFRMSSAS0525,ou=service id,ou=all servers,dc=idbibank,dc=ad"
+      bindPassword:
+        name: ldap-secret
+      insecure: true
+      url: "ldap://idbibank.ad:389/dc=idbibank,dc=ad?sAMAccountName?"
