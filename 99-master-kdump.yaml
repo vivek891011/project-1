@@ -1,0 +1,19 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  name: 99-master-kdump
+  labels:
+    machineconfiguration.openshift.io/role: master
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+        - path: /etc/kdump.conf
+          mode: 0644
+          overwrite: false
+          contents:
+            inline: |
+              path /var/crash
+              core_collector makedumpfile -l --message-level 7 -d 31
