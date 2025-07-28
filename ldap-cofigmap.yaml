@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ldap-sync-config
+  namespace: ldap-sync
+data:
+  ldapgroup.yaml: |
+    kind: LDAPSyncConfig
+    apiVersion: v1
+    url: ldap://idbibank.ad
+    bindDN: "cn=saefrmssas0525,ou=service id,ou=all servers,dc=idbibank,dc=ad"
+    bindPassword: Saefrms#45678@Security789
+    insecure: true 
+    rfc2307:
+      groupsQuery:
+        baseDN: "dc=idbibank,dc=ad"
+        scope: sub
+        derefAliases: never
+        filter: "(|(cn=OCP_PROJECT_MONITOR)(cn=OCP_PROJECT_ADMIN)(cn=OCP_CLUSTER_MONITOR)(cn=OCP_CLUSTER_ADMIN))"
+      groupUIDAttribute: dn
+      groupNameAttributes: [cn]
+      groupMembershipAttributes: [member] 
+      usersQuery:
+        baseDN: "OU=All Locations except DR Chennai,DC=IDBIBANK,DC=ad"
+        scope: sub
+        derefAliases: never
+      userUIDAttribute: dn
+      userNameAttributes: [cn]
