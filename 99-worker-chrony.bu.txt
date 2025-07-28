@@ -1,0 +1,21 @@
+variant: openshift
+version: 4.18.0
+metadata:
+  name: 99-worker-chrony
+  labels:
+    machineconfiguration.openshift.io/role: worker
+storage:
+  files:
+  - path: /etc/chrony.conf
+    mode: 0644
+    overwrite: true
+    contents:
+      inline: |
+        server 10.142.8.178  iburst
+        server 10.142.8.180  iburst
+        server 10.172.12.224 iburst
+        server 10.172.12.226 iburst
+        driftfile /var/lib/chrony/drift
+        makestep 1.0 3
+        rtcsync
+        logdir /var/log/chrony
