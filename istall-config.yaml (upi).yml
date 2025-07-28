@@ -1,0 +1,130 @@
+additionalTrustBundlePolicy: Always
+apiVersion: v1
+baseDomain: idbibank.com
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform: {}
+  replicas: 0
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform: {}
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: efrmsfduat
+networking:
+  clusterNetwork:
+  - cidr: 10.115.0.0/18
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.140.0.0/24
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 10.115.64.0/18
+platform:
+  vsphere:
+    failureDomains:
+    - name: generated-failure-domain
+      region: generated-region
+      server: absolute.idbibank.ad
+      topology:
+        computeCluster: /UAT/host/RHEL_Cluster
+        datacenter: UAT
+        datastore: /UAT/datastore/EFRMS_SFD_UAT_RHELDS01
+        networks:
+        - UAT_VM_PG-143-143
+        resourcePool: /UAT/host/RHEL_Cluster/Resources
+      zone: generated-zone
+    vcenters:
+    - datacenters:
+      - UAT
+      password: Saefrms#45678@Security789
+      port: 443
+      server: absolute.idbibank.ad
+      user: SAEFRMSSAS0525@idbibank.ad
+publish: External
+additionalTrustBundle: |
+  -----BEGIN CERTIFICATE-----
+  MIIDrTCCApWgAwIBAgIUejtzUdzlx+zmM4GM8wIIGgEm9uMwDQYJKoZIhvcNAQEL
+  BQAwdjELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAlZBMREwDwYDVQQHDAhOZXcgWW9y
+  azENMAsGA1UECgwEUXVheTERMA8GA1UECwwIRGl2aXNpb24xJTAjBgNVBAMMHGJh
+  bXIuZWZybXNmZHVhdC5pZGJpYmFuay5jb20wHhcNMjUwNzAxMTQwMDQ0WhcNMjYw
+  NjIyMTQwMDQ0WjAaMRgwFgYDVQQDDA9xdWF5LWVudGVycHJpc2UwggEiMA0GCSqG
+  SIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2LkHBqGfARpHSWfmf+HHwfXfwW725eNWq
+  FPhN4fiVzA8pwMI2hIdUAZa7pK8NzHNY48CC/ddqLzX68wM1fAj78ojQY/5ZXS0S
+  mO8fw7hxVlE6aT6R/3PYmP1gp8XMeZOSwYC4iBmiV06bG0mR8WKYA32idxu0L9vx
+  MOnZO5SsNjIRKNRAgLVHXNhGvUSM2nOEpuBPabDPKmMn4xmYNTVNK0/JfQVTEZLe
+  DeHHqC9HhINh8P7CTDRWVh7N7BQ19QFjHbUo0E8PPXVho+bYD+4HSiNo0SZa3Jyi
+  42cBeIGUf6be+Tiqjgw/ieygSTZQ3dPodZE7hgDvV1WN4lRL52k/AgMBAAGjgY4w
+  gYswCwYDVR0PBAQDAgLkMBMGA1UdJQQMMAoGCCsGAQUFBwMBMCcGA1UdEQQgMB6C
+  HGJhbXIuZWZybXNmZHVhdC5pZGJpYmFuay5jb20wHQYDVR0OBBYEFLH0Prte5w8h
+  BUjsIqKYA++cHuALMB8GA1UdIwQYMBaAFPIhFpvbqd/vGKvLQB0YSOAoU7TsMA0G
+  CSqGSIb3DQEBCwUAA4IBAQBrly/q7B4A3ptVADkvSxV0u433lFHEuDnKEvMJoqZd
+  sOKjIRzVM0gKgE+PuDf9lF45PnApb6AOO2KRe4zWTGRmvrAmapwJlnUk9oNbP/J+
+  F8KrmMXflTJ1x7bNnh95DI+crAIWTzdUpW4z0el5ln9qDP2KBfTfaOL3nokZaw2m
+  Ldej/JZLlIRs4pCC1IDcD/8snhyY84nIdoJ1VllmjL8elLaNa79Nc6L8OFM1iSRO
+  Ghl7i8LWq44LcH378mScJSP9+crz16d1dNfRXbpj6cDCIucW2tlUpXddNgM9riEU
+  3AxNtYAdNw78I6DhFdNC1ZmhOydCpIEazZN5j7EOCpaf
+  -----END CERTIFICATE-----
+  -----BEGIN CERTIFICATE-----
+  MIID+zCCAuOgAwIBAgIUetNo7sy67gX2VRAHYGmqjWE7mIkwDQYJKoZIhvcNAQEL
+  BQAwdjELMAkGA1UEBhMCVVMxCzAJBgNVBAgMAlZBMREwDwYDVQQHDAhOZXcgWW9y
+  azENMAsGA1UECgwEUXVheTERMA8GA1UECwwIRGl2aXNpb24xJTAjBgNVBAMMHGJh
+  bXIuZWZybXNmZHVhdC5pZGJpYmFuay5jb20wHhcNMjUwNzAxMTQwMDQyWhcNMjgw
+  NDIwMTQwMDQyWjB2MQswCQYDVQQGEwJVUzELMAkGA1UECAwCVkExETAPBgNVBAcM
+  CE5ldyBZb3JrMQ0wCwYDVQQKDARRdWF5MREwDwYDVQQLDAhEaXZpc2lvbjElMCMG
+  A1UEAwwcYmFtci5lZnJtc2ZkdWF0LmlkYmliYW5rLmNvbTCCASIwDQYJKoZIhvcN
+  AQEBBQADggEPADCCAQoCggEBAMneM6uQ8ytXohd55kyWXhx7iwAI9mJc/vfWIATa
+  //fOzURP2KfFtLbm6grBmnLKaE6rcXWuMDczrOFPNyMmMtVuApxz1c/dSpFIyrRJ
+  yrX5EXyUuDs6XDeRcLStKoHVls+tQOZfbtroKbto346nPLaS2FKGZocPGORNAAhe
+  fdC93EEwAzfDVcRbchje97bEYGQv1BaoHZV9yiGdnUcDzWN0xr5iDgfZF0ie3wzN
+  esOMBuv0VL0vbfJ+xKrS/BI4wWqs44cVOWtSj5O7XHWLg41rhOtbAa1AH/8Jv0mL
+  F+gOdyodrV5+OPmDvnf/u9dNqCPjMI+WSPVvxDHWH/WIXn8CAwEAAaOBgDB+MAsG
+  A1UdDwQEAwIC5DATBgNVHSUEDDAKBggrBgEFBQcDATAnBgNVHREEIDAeghxiYW1y
+  LmVmcm1zZmR1YXQuaWRiaWJhbmsuY29tMBIGA1UdEwEB/wQIMAYBAf8CAQEwHQYD
+  VR0OBBYEFPIhFpvbqd/vGKvLQB0YSOAoU7TsMA0GCSqGSIb3DQEBCwUAA4IBAQCN
+  JfJVVkcQjgTzIsV0qZA4RfRuzRcHdwQ6EwDrjuDDSn2hVrfP4uYZWLTOdgBNdYoi
+  WUhChORotS8ZzuORUaOeBCRPlwoFdrhA+6Xz/n8Z2ZrGUiD0qABuO2oAtJY9mVLF
+  9KMrOCGPmiXIky/86RAxvZChoVI0UTYjbP1uRgq+VnTfzygULc2yUWgWrmSzj+L2
+  V+VTGrF4k1iaBf5FHBH3MIF/MUwet/zwI1K5OVSIIArr+7UVTzKkChwezsco9ANG
+  avg3L7M+JWVLa2KOGeJoy+z4+xv5kDCLa56aqU/tYlbxQjzgqxJIRvWRMIxhK2sK
+  UyS2dnIeAJTh3rTrYhFx
+  -----END CERTIFICATE-----
+  -----BEGIN CERTIFICATE-----
+  MIID8TCCAtmgAwIBAgIJAOifo8lB3F1GMA0GCSqGSIb3DQEBCwUAMIGDMQswCQYD
+  VQQDDAJDQTEXMBUGCgmSJomT8ixkARkWB3ZzcGhlcmUxFTATBgoJkiaJk/IsZAEZ
+  FgVsb2NhbDELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExETAPBgNV
+  BAoMCEFic29sdXRlMQ8wDQYDVQQLDAZWTXdhcmUwHhcNMTcwODA2MTkxMTU1WhcN
+  MjcwODA0MTkxMTU1WjCBgzELMAkGA1UEAwwCQ0ExFzAVBgoJkiaJk/IsZAEZFgd2
+  c3BoZXJlMRUwEwYKCZImiZPyLGQBGRYFbG9jYWwxCzAJBgNVBAYTAlVTMRMwEQYD
+  VQQIDApDYWxpZm9ybmlhMREwDwYDVQQKDAhBYnNvbHV0ZTEPMA0GA1UECwwGVk13
+  YXJlMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1XEgJUuNzShRC1ZT
+  zKsHQP5CfR9TtlOPwTHAgUOXtYEP7Gd06PC6MwYMlEQ0th6eVY5KfDuKbLjyU+R6
+  rPeGIVNTRklIW9tuXwGAXRBoNF9peXKKZgE2PQ2LmnemewHNFwrw7775p8y+PtkT
+  a1k4twU8taVSmzMjBwOXQCq19OcbIXefurrvWSo/5MhkWs11gTDUe4euuEI77oD2
+  FYd4Nl+oMgz4bzfz3g1KLvuUpM8hZI5NvCc6zIbrQvdg1olqOeHRfxKutQjC6gd0
+  jRYA0vc7kKF0lL9h8w9980bpS/aP6JAcnJ1x6jFjmk4SJdeJrLDFcs3UmQ7wjxi9
+  HhDqAwIDAQABo2YwZDAdBgNVHQ4EFgQUt4oas9oFWBql1k9uaeIkhIXN+gQwHwYD
+  VR0RBBgwFoEOZW1haWxAYWNtZS5jb22HBH8AAAEwDgYDVR0PAQH/BAQDAgEGMBIG
+  A1UdEwEB/wQIMAYBAf8CAQAwDQYJKoZIhvcNAQELBQADggEBACEU73Kvn+kKGKRK
+  LPRviWDFpHjuL2x6Vz2/LIFultm404zKEJ6dUDd+Y7ZdO7oNbHxco9A5LtLJNwKG
+  9af14d53FgpwWdAT/SJ9kjlN+M96lusRPdXVG1wYSGDpmYQSeMflD0fCsRSNM3ko
+  M9hRwn+MvpuRbKWT9D6tEiPMbpAGUh+0tcN25lvBBGzNWKBiFray3WGMnvE46sQx
+  1J3negNf0HhIcnMPXIb/IID9yPvctBFkW26xT7DOMjIl+v1ZVD/VFBPV148hbfyh
+  q9xcYb2U+Qko91mSvQBF1w+SE2ID09jX+skubySV4KUjImP5i6Xs4TC6LIk3u0Yk
+  mLQWZZQ=
+  -----END CERTIFICATE-----
+imageContentSources:
+- mirrors:
+  - bamr.efrmsfduat.idbibank.com:8443/ocp-base/openshift/release
+  source: quay.io/openshift-release-dev/ocp-v4.0-art-dev
+- mirrors:
+  - bamr.efrmsfduat.idbibank.com:8443/ocp-base/openshift/release-images
+  source: quay.io/openshift-release-dev/ocp-release
+pullSecret: '{"auths":{"bamr.efrmsfduat.idbibank.com:8443":{"auth":"aW5pdDppZGJpMTIzNA==","email":"unixadmin@idbiintech.com"}}}'
+sshKey: |
+  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC3Fqwt52qYysqpoQAy01t4Zm5MD4t2ffgNJeHWr7uhljqc97o/dZIKYlY95fy0SiYYAKGFevAt75N5G3y44SCZVdPm7b8ZOoa6de79i0MW8YlH+uaDUYtdtLzzLRpCjCeKDLY0YLTS9QSuODprOH+gXcjaKa+hjq2xENfVYmbdQktsOyZqqPCEbHfy4YknAuY6N9OlYZOcSHaQD/d27lrWY4fz+2HjcY3P6oIRSetMpwFdjPSVk+QZbezqPnkWSLH0ijV/7eaE0RPahWuMmfr8NiW1pfQcllp5/Z+1fnUETiF0AumfgFjpfkSpA3URwELOKq4YedIMV4NQgYDhLWhOEa8QxJg7Usl0/8oOfV1oOy0qiSGWqwk8R6Kp1OL5bt28hsIepXUnNlBToR3VX5PTUseorgxI8jKlCRWZCXtl+3QYe++SjmjZKnYv8m6DlN3yOLk+ByWdWYwWfGByBrRAG8nC6kVKjt4yZYw9Th+4dZ9jYq8mcKCrhCmb4CQlYEE= root@EFRMSFDUATAP01
