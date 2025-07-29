@@ -1,0 +1,148 @@
+apiVersion: operator.openshift.io/v1
+kind: IngressController
+metadata:
+  creationTimestamp: "2025-07-07T14:41:56Z"
+  finalizers:
+  - ingresscontroller.operator.openshift.io/finalizer-ingresscontroller
+  generation: 4
+  name: default
+  namespace: openshift-ingress-operator
+  resourceVersion: "10591845"
+  uid: 46c3edf3-1513-49b4-8013-ba4b9c4dd4dc
+spec:
+  clientTLS:
+    clientCA:
+      name: ""
+    clientCertificatePolicy: ""
+  httpCompression: {}
+  httpEmptyRequestsPolicy: Respond
+  httpErrorCodePages:
+    name: ""
+  idleConnectionTerminationPolicy: Deferred
+  namespaceSelector:
+    matchExpressions:
+    - key: type
+      operator: NotIn
+      values:
+      - sharded
+  nodePlacement:
+    nodeSelector:
+      matchLabels:
+        node-role.kubernetes.io/infra: ""
+    tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/infra
+      operator: Exists
+  replicas: 2
+  tlsSecurityProfile:
+    custom:
+      ciphers:
+      - ECDHE-ECDSA-AES128-GCM-SHA256
+      - ECDHE-RSA-AES128-GCM-SHA256
+      - ECDHE-ECDSA-CHACHA20-POLY1305
+      - ECDHE-RSA-AES256-GCM-SHA384
+      - ECDHE-RSA-CHACHA20-POLY1305
+      - ECDHE-ECDSA-AES256-GCM-SHA384
+      - TLS_AES_128_GCM_SHA256
+      - TLS_AES_256_GCM_SHA384
+      - TLS_CHACHA20_POLY1305_SHA256
+      minTLSVersion: VersionTLS12
+    type: Custom
+  tuningOptions:
+    reloadInterval: 0s
+  unsupportedConfigOverrides: null
+status:
+  availableReplicas: 2
+  conditions:
+  - lastTransitionTime: "2025-07-07T14:41:56Z"
+    reason: Valid
+    status: "True"
+    type: Admitted
+  - lastTransitionTime: "2025-07-09T15:09:11Z"
+    message: The deployment has Available status condition set to True
+    reason: DeploymentAvailable
+    status: "True"
+    type: DeploymentAvailable
+  - lastTransitionTime: "2025-07-09T15:09:11Z"
+    message: Minimum replicas requirement is met
+    reason: DeploymentMinimumReplicasMet
+    status: "True"
+    type: DeploymentReplicasMinAvailable
+  - lastTransitionTime: "2025-07-29T11:11:27Z"
+    message: All replicas are available
+    reason: DeploymentReplicasAvailable
+    status: "True"
+    type: DeploymentReplicasAllAvailable
+  - lastTransitionTime: "2025-07-29T11:11:27Z"
+    message: Deployment is not actively rolling out
+    reason: DeploymentNotRollingOut
+    status: "False"
+    type: DeploymentRollingOut
+  - lastTransitionTime: "2025-07-07T14:41:57Z"
+    message: The configured endpoint publishing strategy does not include a managed
+      load balancer
+    reason: EndpointPublishingStrategyExcludesManagedLoadBalancer
+    status: "False"
+    type: LoadBalancerManaged
+  - lastTransitionTime: "2025-07-07T14:41:57Z"
+    message: LoadBalancer is not progressing
+    reason: LoadBalancerNotProgressing
+    status: "False"
+    type: LoadBalancerProgressing
+  - lastTransitionTime: "2025-07-07T14:41:57Z"
+    message: No DNS zones are defined in the cluster dns config.
+    reason: NoDNSZones
+    status: "False"
+    type: DNSManaged
+  - lastTransitionTime: "2025-07-09T15:09:11Z"
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2025-07-29T11:11:27Z"
+    status: "False"
+    type: Progressing
+  - lastTransitionTime: "2025-07-21T14:11:49Z"
+    status: "False"
+    type: Degraded
+  - lastTransitionTime: "2025-07-07T14:41:57Z"
+    message: IngressController is upgradeable.
+    reason: Upgradeable
+    status: "True"
+    type: Upgradeable
+  - lastTransitionTime: "2025-07-07T14:41:57Z"
+    message: No evaluation condition is detected.
+    reason: NoEvaluationCondition
+    status: "False"
+    type: EvaluationConditionsDetected
+  - lastTransitionTime: "2025-07-21T14:11:49Z"
+    message: Canary route checks for the default ingress controller are successful
+    reason: CanaryChecksSucceeding
+    status: "True"
+    type: CanaryChecksSucceeding
+  domain: apps.efrmsfduat.idbibank.com
+  endpointPublishingStrategy:
+    hostNetwork:
+      httpPort: 80
+      httpsPort: 443
+      protocol: TCP
+      statsPort: 1936
+    type: HostNetwork
+  namespaceSelector:
+    matchExpressions:
+    - key: type
+      operator: NotIn
+      values:
+      - sharded
+  observedGeneration: 4
+  selector: ingresscontroller.operator.openshift.io/deployment-ingresscontroller=default
+  tlsProfile:
+    ciphers:
+    - ECDHE-ECDSA-AES128-GCM-SHA256
+    - ECDHE-RSA-AES128-GCM-SHA256
+    - ECDHE-ECDSA-CHACHA20-POLY1305
+    - ECDHE-RSA-AES256-GCM-SHA384
+    - ECDHE-RSA-CHACHA20-POLY1305
+    - ECDHE-ECDSA-AES256-GCM-SHA384
+    - TLS_AES_128_GCM_SHA256
+    - TLS_AES_256_GCM_SHA384
+    - TLS_CHACHA20_POLY1305_SHA256
+    minTLSVersion: VersionTLS12
